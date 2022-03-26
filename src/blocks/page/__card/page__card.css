@@ -1,0 +1,13 @@
+.page__card {
+  margin-bottom: 20px;
+}
+
+.page__card:last-of-type {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 600px) {
+  .page__card { 
+    margin-bottom: 0;
+  }
+}

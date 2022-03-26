@@ -1,0 +1,27 @@
+.profile__photo-edit-button {
+  padding: 0;
+  border: none;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0;
+  transition: opacity .4s;
+  cursor: pointer;
+}
+
+.profile__photo-edit-button:hover {
+  opacity: .8;
+}
+
+.profile__photo-edit-button::before {
+  content: "";
+  background: url(../../../images/edit-avatar-button.svg) no-repeat center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+}

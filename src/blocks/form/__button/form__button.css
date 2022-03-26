@@ -1,0 +1,34 @@
+.form__button {
+  width: 100%;
+  color: white;
+  background-color: black;
+  text-align: center;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.21;
+  margin-bottom: 17px;
+  border: none;
+  border-radius: 2px;
+  padding: 14px 0;
+}
+
+.form__button:last-of-type {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .form__button {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .form__button {
+    transition: opacity .4s;
+  }
+
+  .form__button:hover {
+    opacity: .8;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,15 @@
+.popup__content {
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px 22px;
+  position: relative;
+  z-index: 5;
+}
+
+@media screen and (min-width: 1024px) {
+  .popup__content {
+    width: 430px;
+    padding: 34px 36px 37px 36px;
+  }
+}

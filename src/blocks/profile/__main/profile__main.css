@@ -1,0 +1,15 @@
+.profile__main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 26px 0 14px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .profile__main {
+    justify-self: flex-start;
+    align-self: flex-end;
+    grid-area: main;
+    margin: 0;
+  }
+}
