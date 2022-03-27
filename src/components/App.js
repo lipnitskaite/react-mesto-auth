@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Route } from 'react-router-dom';
 import Header from '../components/Header';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
@@ -88,16 +89,17 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header/>
-
-        <Main 
-          onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          cards={cards}
-          onAddCard={handleAddCardClick}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-        />
+        <Route path="/">
+          <Main 
+            onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            cards={cards}
+            onAddCard={handleAddCardClick}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+          />
+        </Route>
 
         <Footer />
 
