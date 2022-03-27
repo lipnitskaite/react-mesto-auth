@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Login from '../components/Login';
 import Register from '../components/Register';
 import InfoTooltip from '../components/InfoTooltip';
@@ -10,10 +10,12 @@ import EditProfilePopup from '../components/EditProfilePopup';
 import EditAvatarPopup from '../components/EditAvatarPopup';
 import AddPlacePopup from '../components/AddPlacePopup';
 import ImagePopup from '../components/ImagePopup';
+import ProtectedRoute from '../components/ProtectedRoute';
 import api from '../utils/api';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddCardPopupOpen, setIsAddCardPopupOpen] = useState(false);
@@ -92,25 +94,32 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header/>
-        <Route path="/sign-in">
-          <Login />
-        </Route>
 
-        <Route path="/sign-up">
-          <Register />
-        </Route>
+        <Switch>
+          <Route path="/sign-in">
+            <Login />
+          </Route>
 
-        <Route path="/">
-          <Main 
-            onEditAvatar={handleEditAvatarClick}
-            onEditProfile={handleEditProfileClick}
-            cards={cards}
-            onAddCard={handleAddCardClick}
-            onCardClick={handleCardClick}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
+          <Route path="/sign-up">
+            <Register />
+          </Route>
+
+          <ProtectedRoute 
+            path="/"
+            component={Main}
+            loggedIn={loggedIn}
           />
-        </Route>
+        </Switch>
+
+        <Main 
+          onEditAvatar={handleEditAvatarClick}
+          onEditProfile={handleEditProfileClick}
+          cards={cards}
+          onAddCard={handleAddCardClick}
+          onCardClick={handleCardClick}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
+        />
 
         <Footer />
 
