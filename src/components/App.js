@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import Login from '../components/Login';
 import Register from '../components/Register';
+import InfoTooltip from '../components/InfoTooltip';
 import Header from '../components/Header';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
@@ -112,6 +113,8 @@ function App() {
         </Route>
 
         <Footer />
+
+        <InfoTooltip />
 
         <EditProfilePopup 
           isOpen={isEditProfilePopupOpen}
