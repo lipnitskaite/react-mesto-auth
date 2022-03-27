@@ -1,0 +1,10 @@
+.form__title_type_auth {
+  color: white;
+  font-size: 20px; 
+}
+
+@media screen and (min-width: 1024px) {
+  .form__title_type_auth {
+    font-size: 24px;
+  }
+}

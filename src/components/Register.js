@@ -32,40 +32,30 @@ function Register({isOpen, onUpdateUser}) {
 
   return (
     <Auth
-      name="edit-profile"
-      title="Редактировать профиль"
-      buttonTitle="Сохранить"
-      isOpen={isOpen}
-      onClose={handleClose}
-      onSubmit={handleSubmit}
+      name="register"
+      title="Регистрация"
+      buttonTitle="Зарегистрироваться"
+      // onSubmit={handleSubmit}
       children={[
-        <fieldset className="form__container">
+        <fieldset className="form__container form__container_type_auth">
           <input 
-            id="name-input" 
-            className="form__input form__input_type_name" 
-            placeholder="Имя" 
-            type="text" 
-            name="name" 
-            value={name || ''} 
-            onChange={handleNameChange} 
-            required 
-            minLength="2" 
-            maxLength="40"
-          />
-          <span className="name-input-error form__input-error"></span>
-          <input 
-            id="job-input"
-            className="form__input form__input_type_job"
-            placeholder="Занятие"
-            type="text"
-            name="about"
-            value={description || ''}
-            onChange={handleDescriptionChange}
+            id="email-input"
+            className="form__input form__input_type_auth"
+            type="email"
+            name="email"
+            placeholder="Email"
             required
-            minLength="2"
-            maxLength="200"
           />
-          <span className="job-input-error form__input-error"></span>
+          {/* <span className="login-input-error form__input-error"></span> */}
+          <input 
+            id="password-input"
+            className="form__input form__input_type_auth"
+            type="password"
+            name="password"
+            placeholder="Пароль"
+            required
+          />
+          {/* <span className="login-input-error form__input-error"></span> */}
         </fieldset>
       ]}
     />

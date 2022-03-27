@@ -1,0 +1,23 @@
+.form__button_type_submit-login {
+  color: black;
+  background-color: white;
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .form__button_type_submit-login {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .form__button_type_submit-login {
+    transition: opacity .4s;
+  }
+
+  .form__button_type_submit-login:hover {
+    opacity: .85;
+    cursor: pointer;
+  }
+}

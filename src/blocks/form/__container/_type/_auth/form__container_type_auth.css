@@ -1,0 +1,9 @@
+.form__container_type_auth {
+  margin: 27px 0 173px 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .form__container_type_auth {
+    margin: 37px 0 216px 0;
+  }
+}

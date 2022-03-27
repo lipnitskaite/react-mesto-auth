@@ -1,0 +1,19 @@
+.form__input_type_auth {
+  background-color: black;
+  margin-bottom: 17px;
+  border-bottom: 2px solid #ccc;
+}
+
+.form__input_type_auth:last-of-type {
+  margin-bottom: 0;
+}
+
+.form__input_type_auth::placeholder {
+  color: #ccc;
+}
+
+@media screen and (min-width: 1024px) {
+  .form__input_type_auth {
+    margin-bottom: 30px;
+  }
+}

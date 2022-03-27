@@ -10,6 +10,9 @@
 /* Logo Block */
 @import url(./blocks/logo/logo.css);
 
+/* Auth Block */
+@import url(./blocks/auth/auth.css);
+
 /* Profile Block */
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/profile/__photo-container/profile__photo-container.css);
@@ -34,14 +37,20 @@
 @import url(./blocks/popup/__caption/popup__caption.css);
 
 /* Form Block */
+@import url(./blocks/form/_type/_login/form_type_login.css);
+@import url(./blocks/form/_type/_register/form_type_register.css);
 @import url(./blocks/form/__container/form__container.css);
+@import url(./blocks/form/__container/_type/_auth/form__container_type_auth.css);
 @import url(./blocks/form/__title/form__title.css);
+@import url(./blocks/form/__title/_type/_auth/form__title_type_auth.css);
 @import url(./blocks/form/__input/form__input.css);
 @import url(./blocks/form/__input/_type/_post-title/form__input_type_post-title.css);
 @import url(./blocks/form/__input/_type/_post-image/form__input_type_post-image.css);
 @import url(./blocks/form/__input/_type/_error/form__input_type_error.css);
+@import url(./blocks/form/__input/_type/_auth/form__input_type_auth.css);
 @import url(./blocks/form/__button/form__button.css);
-@import url(./blocks/form/__button/_type/form__button_type_delete-post.css);
+@import url(./blocks/form/__button/_type/_delete-post/form__button_type_delete-post.css);
+@import url(./blocks/form/__button/_type/_submit-login/form__button_type_submit-login.css);
 @import url(./blocks/form/__button/_inactive/form__button_inactive.css);
 @import url(./blocks/form/__input-error/form__input-error.css);
 @import url(./blocks/form/__input-error/_active/form__input-error_active.css);

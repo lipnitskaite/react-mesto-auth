@@ -1,0 +1,13 @@
+.form_type_register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  margin-top: 40px;
+}
+
+@media screen and (min-width: 1024px) {
+  .form_type_register {
+    margin-top: 60px;
+  }
+}
