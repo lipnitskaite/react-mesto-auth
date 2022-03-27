@@ -1,0 +1,16 @@
+.auth__login-link {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 1280px) {
+  .auth__login-link {
+    transition: opacity .4s;
+  }
+
+  .auth__login-link:hover {
+    opacity: .6;
+    cursor: pointer;
+  }
+}
