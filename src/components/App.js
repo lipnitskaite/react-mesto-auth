@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
+import Login from '../components/Login';
+import Register from '../components/Register';
 import Header from '../components/Header';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
@@ -89,6 +91,14 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header/>
+        <Route path="/sign-in">
+          <Login />
+        </Route>
+
+        <Route path="/sign-up">
+          <Register />
+        </Route>
+
         <Route path="/">
           <Main 
             onEditAvatar={handleEditAvatarClick}
