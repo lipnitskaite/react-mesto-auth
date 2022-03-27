@@ -12,6 +12,7 @@
 
 /* Auth Block */
 @import url(./blocks/auth/auth.css);
+@import url(./blocks/auth/__login-tip/auth__login-tip.css);
 
 /* Profile Block */
 @import url(./blocks/profile/profile.css);

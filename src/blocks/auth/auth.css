@@ -1,5 +1,5 @@
 .auth {
-  width: calc(100% - (19px*2));
+  width: calc(100% - (30px*2));
   min-height: 100vh;
   margin: 0 auto;
   display: flex;

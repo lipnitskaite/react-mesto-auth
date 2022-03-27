@@ -1,5 +1,4 @@
 import React from 'react';
-import Auth from '../components/Auth';
 
 function Login() {
   // const currentUser = useContext(CurrentUserContext);
@@ -31,12 +30,9 @@ function Login() {
   // }
 
   return (
-    <Auth
-      name="login"
-      title="Вход"
-      buttonTitle="Войти"
-      // onSubmit={handleSubmit}
-      children={[
+    <section className="auth">
+      <form className='form form_type_login' name='login' onSubmit noValidate>
+        <h2 className="form__title form__title_type_auth">Вход</h2>
         <fieldset className="form__container form__container_type_auth">
           <input 
             id="email-input"
@@ -57,8 +53,9 @@ function Login() {
           />
           {/* <span className="login-input-error form__input-error"></span> */}
         </fieldset>
-      ]}
-    />
+        <button className="form__button form__button_type_submit-login" type="submit" name="submit" value='Войти'>Войти</button>
+      </form>
+    </section>
   );
 }
 

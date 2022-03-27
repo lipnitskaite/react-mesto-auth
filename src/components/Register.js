@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Auth from '../components/Auth';
         
-function Register({isOpen, onUpdateUser}) {
+function Register() {
   // const currentUser = useContext(CurrentUserContext);
 
   // const [name, setName] = useState('');
@@ -31,12 +30,9 @@ function Register({isOpen, onUpdateUser}) {
   // }
 
   return (
-    <Auth
-      name="register"
-      title="Регистрация"
-      buttonTitle="Зарегистрироваться"
-      // onSubmit={handleSubmit}
-      children={[
+    <section className="auth">
+      <form className='form form_type_register' name='register' onSubmit noValidate>
+        <h2 className="form__title form__title_type_auth">Регистрация</h2>
         <fieldset className="form__container form__container_type_auth">
           <input 
             id="email-input"
@@ -57,8 +53,10 @@ function Register({isOpen, onUpdateUser}) {
           />
           {/* <span className="login-input-error form__input-error"></span> */}
         </fieldset>
-      ]}
-    />
+        <button className="form__button form__button_type_submit-login" type="submit" name="submit" value='Зарегистрироваться'>Зарегистрироваться</button>
+      </form>
+      <p className='auth__login-tip'>Уже зарегистрированы? Войти</p>
+    </section>
   );
 }
 

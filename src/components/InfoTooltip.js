@@ -4,7 +4,7 @@ import failImage from '../images/registration_fail.svg';
 
 function InfoTooltip({onClose}) {
   return (
-    <section className="popup popup__type_info-tooltip popup_opened">
+    <section className="popup popup__type_info-tooltip">
       <div className="popup__overlay" onClick={onClose}></div>
       <div className="popup__container">
         <button className="popup__close" type="button" onClick={onClose}></button>
