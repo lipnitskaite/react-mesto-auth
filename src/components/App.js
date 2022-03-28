@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Login from '../components/Login';
 import Register from '../components/Register';
-import InfoTooltip from '../components/InfoTooltip';
 import Header from '../components/Header';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
@@ -97,7 +96,7 @@ function App() {
 
         <Switch>
           <Route path="/sign-in">
-            <Login />
+            <Login handleLogin={setLoggedIn} />
           </Route>
 
           <Route path="/sign-up">
@@ -106,24 +105,24 @@ function App() {
 
           <ProtectedRoute 
             path="/"
-            component={Main}
+            component={
+              <Main 
+                onEditAvatar={handleEditAvatarClick}
+                onEditProfile={handleEditProfileClick}
+                cards={cards}
+                onAddCard={handleAddCardClick}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
+              />
+            }
             loggedIn={loggedIn}
           />
+
+          <Footer />
         </Switch>
 
-        <Main 
-          onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          cards={cards}
-          onAddCard={handleAddCardClick}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-        />
-
-        <Footer />
-
-        <InfoTooltip />
+        
 
         <EditProfilePopup 
           isOpen={isEditProfilePopupOpen}
