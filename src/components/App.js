@@ -16,13 +16,16 @@ import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 function App() {
   const history = useHistory();
+
   const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+
+  const [cards, setCards] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(null);
+
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddCardPopupOpen, setIsAddCardPopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [currentUser, setCurrentUser] = useState({});
-  const [cards, setCards] = useState([]);
 
   const handleEditAvatarClick = () => {setIsEditAvatarPopupOpen(true)};
   const handleEditProfileClick = () => {setIsEditProfilePopupOpen(true)};
@@ -48,6 +51,7 @@ function App() {
       if (data.token) {
         localStorage.setItem('token', data.token);
         setLoggedIn(true);
+        history.push('/');
       }
     })
   }
