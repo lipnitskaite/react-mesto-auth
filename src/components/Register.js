@@ -1,7 +1,5 @@
-import React, { useState,  } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import InfoTooltip from '../components/InfoTooltip';
-import * as Auth from '../components/Auth';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
         
 function Register({ handleRegister }) {
   const [data, setData] = useState({

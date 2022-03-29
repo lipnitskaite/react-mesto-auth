@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
 import EditProfilePopup from '../components/EditProfilePopup';
+import InfoTooltip from '../components/InfoTooltip';
 import EditAvatarPopup from '../components/EditAvatarPopup';
 import AddPlacePopup from '../components/AddPlacePopup';
 import ImagePopup from '../components/ImagePopup';
@@ -27,6 +28,8 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddCardPopupOpen, setIsAddCardPopupOpen] = useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState();
 
   const handleEditAvatarClick = () => {setIsEditAvatarPopupOpen(true)};
   const handleEditProfileClick = () => {setIsEditProfilePopupOpen(true)};
@@ -47,8 +50,14 @@ function App() {
   function handleRegister(email, password) {
     return Auth.register(email, password)
     .then(() => {
-      history.push('/');
-    });
+      setIsInfoTooltipOpen(true);
+      setIsRegistrationSuccessful(true);
+      history.push('/sign-in');
+    })
+    .catch(() => {
+      setIsInfoTooltipOpen(true);
+      setIsRegistrationSuccessful(false);
+    })
   }
 
   function handleLogin(email, password) {
@@ -74,8 +83,6 @@ function App() {
         Auth.getContent(token)
         .then((res) => {
           if (res) {
-            console.log(res.data);
-            console.log(res.data.email);
             const userEmail = res.data.email;
 
             setLoggedIn(true);
@@ -100,6 +107,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddCardPopupOpen(false);
+    setIsInfoTooltipOpen(false);
     setSelectedCard(null);
   };
 
@@ -124,7 +132,6 @@ function App() {
   const handleAddPlaceSubmit = (card) => {
     api.addCard(card)
     .then((newCard) => {
-      console.log(newCard);
       setCards([newCard, ...cards]); 
       closeAllPopups();
     })
@@ -176,6 +183,12 @@ function App() {
 
           <Footer />
         </Switch>
+
+        <InfoTooltip 
+          isOpen={isInfoTooltipOpen}
+          successResult={isRegistrationSuccessful}
+          onClose={closeAllPopups}
+        />
 
         <EditProfilePopup 
           isOpen={isEditProfilePopupOpen}
