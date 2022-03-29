@@ -8,10 +8,10 @@ function Header(props) {
       <img src={logo} alt="Логотип 'Место'" className="logo" />
 
       <Route exact path="/">
-        <div className='header__user-info'>
-          <p className='header__email'>{props.userEmail}</p>
-          <Link to={`./sign-in`} className="header__link">Выйти</Link>
-        </div> 
+        <ul className='header__nav'>
+          <li className='header__nav_item'>{props.userEmail}</li>
+          <li className='header__nav_item'><Link to={`./sign-in`} className="header__link">Выйти</Link></li>
+        </ul> 
       </Route>
 
       <Route path="/sign-up">
