@@ -1,6 +1,6 @@
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
-const CheckResponse = (response) => {
+const checkResponse = (response) => {
   if (response.ok) {
     return response.json();
   }
@@ -23,7 +23,7 @@ export const register = (email, password) => {
     },
     body: JSON.stringify({ email, password })
   })
-  .then(CheckResponse)
+  .then(checkResponse)
 };
 
 export const authorize = (email, password) => {
@@ -33,8 +33,7 @@ export const authorize = (email, password) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({email, password})
+    body: JSON.stringify({ email, password })
   })
-  .then((response => response.json()))
-  .catch(err => console.log(err))
+  .then(checkResponse)
 }; 
