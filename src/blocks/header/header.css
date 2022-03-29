@@ -1,8 +1,11 @@
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   box-sizing: border-box;
   min-width: 320px;
   width: 100%;
-  padding: 0 0 31.6px 27px;
+  padding: 0 30px 31.6px 30px;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
 }
 

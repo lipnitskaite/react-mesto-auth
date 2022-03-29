@@ -1,0 +1,13 @@
+.header__user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 1024px) {
+  .header__user-info {
+    flex-direction: row;
+    align-items: center;
+  }
+}
