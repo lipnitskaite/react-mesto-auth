@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import Login from '../components/Login';
 import Register from '../components/Register';
 import Header from '../components/Header';
@@ -11,7 +11,7 @@ import EditAvatarPopup from '../components/EditAvatarPopup';
 import AddPlacePopup from '../components/AddPlacePopup';
 import ImagePopup from '../components/ImagePopup';
 import ProtectedRoute from '../components/ProtectedRoute';
-import api from '../utils/api';
+import {api, authApi} from '../utils/api';
 import * as Auth from '../components/Auth';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
@@ -19,7 +19,7 @@ function App() {
   const history = useHistory();
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState({});
+  const [userEmail, setUserEmail] = useState('');
   const [currentUser, setCurrentUser] = useState({});
 
   const [cards, setCards] = useState([]);
@@ -37,15 +37,41 @@ function App() {
   const handleCardClick = (card) => {setSelectedCard(card)};
 
   useEffect(() => {
+    tokenCheck();
+  }, [])
+
+  useEffect(() => {
     if (loggedIn) {
       history.push('/');
     }
   }, [loggedIn])
 
   useEffect(() => {
-    tokenCheck();
-  })
+    Promise.all([api.getUserInfoApi(), api.getCards()])
+    .then(([userData, cards]) => {
+      setCurrentUser(userData);
+      setCards(cards);
+    })
+    .catch(err => console.log(err));
+  }, []);
 
+  function handleLogin(email, password) {
+    return Auth.authorize(email, password)
+    .then((data) => {
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+
+        // const userEmail = data.email;
+        // setUserEmail(userEmail);
+        
+        // const { user: {email} } = data;
+        // const userEmail = { email };
+        // setUserEmail(userEmail);
+        setLoggedIn(true);
+        history.push('/');
+      }
+    })
+  }
 
   function handleRegister(email, password) {
     return Auth.register(email, password)
@@ -57,21 +83,6 @@ function App() {
     .catch(() => {
       setIsInfoTooltipOpen(true);
       setIsRegistrationSuccessful(false);
-    })
-  }
-
-  function handleLogin(email, password) {
-    return Auth.authorize(email, password)
-    .then((data) => {
-      if (data.token) {
-        localStorage.setItem('token', data.token);
-        
-        // const { user: {email} } = data;
-        // const userEmail = { email };
-        // setUserEmail(userEmail);
-        setLoggedIn(true);
-        history.push('/');
-      }
     })
   }
 
@@ -93,15 +104,6 @@ function App() {
       };
     };
   };
-
-  useEffect(() => {
-    Promise.all([api.getUserInfoApi(), api.getCards()])
-    .then(([userData, cards]) => {
-      setCurrentUser(userData);
-      setCards(cards);
-    })
-    .catch(err => console.log(err));
-  }, []);
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
@@ -181,8 +183,12 @@ function App() {
             />
           </ProtectedRoute>
 
-          <Footer />
+          <Route>
+            {loggedIn ? <Redirect to ="/" /> : <Redirect to="/sign-in" />}
+          </Route>
         </Switch>
+
+        <Footer />
 
         <InfoTooltip 
           isOpen={isInfoTooltipOpen}
