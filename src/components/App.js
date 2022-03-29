@@ -18,6 +18,7 @@ function App() {
   const history = useHistory();
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState({});
   const [currentUser, setCurrentUser] = useState({});
 
   const [cards, setCards] = useState([]);
@@ -38,6 +39,11 @@ function App() {
     }
   }, [loggedIn])
 
+  useEffect(() => {
+    tokenCheck();
+  })
+
+
   function handleRegister(email, password) {
     return Auth.register(email, password)
     .then(() => {
@@ -50,11 +56,36 @@ function App() {
     .then((data) => {
       if (data.token) {
         localStorage.setItem('token', data.token);
+        
+        // const { user: {email} } = data;
+        // const userEmail = { email };
+        // setUserEmail(userEmail);
         setLoggedIn(true);
         history.push('/');
       }
     })
   }
+
+  function tokenCheck() {
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+
+      if (token) {
+        Auth.getContent(token)
+        .then((res) => {
+          if (res) {
+            console.log(res.data);
+            console.log(res.data.email);
+            const userEmail = res.data.email;
+
+            setLoggedIn(true);
+            setUserEmail(userEmail);
+            history.push('/');
+          }
+        });
+      };
+    };
+  };
 
   useEffect(() => {
     Promise.all([api.getUserInfoApi(), api.getCards()])
@@ -121,7 +152,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header/>
+        <Header userEmail={userEmail} />
         <Switch>
           <Route path="/sign-up">
             <Register handleRegister={handleRegister}/>
