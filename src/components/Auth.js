@@ -1,28 +1,40 @@
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
-export const register = (password, email) => {
+const CheckResponse = (response) => {
+  if (response.ok) {
+    return response.json();
+  }
+  return response.json()
+  .then((data) => {
+    const { statusCode } = data;
+    const { message } = data.message[0].message[0];
+    const error = new Error(message || 'Что-то пошло не так');
+    error.status = statusCode;
+    throw error;
+  })
+}
+
+export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
+      "Accept": "application/json",
       "Content-Type": "application/json" 
     },
-    // body: {
-    //   password: "somepassword",
-    //   email: "email@yandex.ru"
-    // }
-    body: JSON.stringify({password, email})
+    body: JSON.stringify({ email, password })
   })
-  .then((response) => {
-    try {
-      if (response.status === 200) {
-        return response.json();
-      }
-    } catch(e) {
-      return(e);
-    }
-  })
-  .then((res) => {
-    return res;
-  })
-  .catch((err) => console.log(err));
+  .then(CheckResponse)
 };
+
+export const authorize = (email, password) => {
+  return fetch(`${BASE_URL}/signin`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({email, password})
+  })
+  .then((response => response.json()))
+  .catch(err => console.log(err))
+}; 

@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState,  } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import InfoTooltip from '../components/InfoTooltip';
 import * as Auth from '../components/Auth';
         
-function Register() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+function Register({ handleRegister }) {
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+  });
+  const { email, password } = data;
 
   function handleChange(e) {
-    if (e.target.name === "email") {
-      setEmail(e.target.value);
-    }
-    if (e.target.name === "password") {
-      setPassword(e.target.value);
-    }
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value
+    });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    // const password = password;
-    // const email = email;
-
-    Auth.register(password, email);
+    handleRegister(email, password)
+    .catch((err) => console.log(err))
   }
 
   return (
