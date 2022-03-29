@@ -2,14 +2,14 @@ import React from 'react';
 import logo from '../images/logo-mesto.svg';
 import { Link, Route } from 'react-router-dom';
 
-function Header() {
+function Header(props) {
   return (
     <header className="header">
       <img src={logo} alt="Логотип 'Место'" className="logo" />
 
       <Route exact path="/">
         <div className='header__user-info'>
-          <p className='header__email'>email@email.com</p>
+          <p className='header__email'>{props.userEmail}</p>
           <Link to={`./sign-in`} className="header__link">Выйти</Link>
         </div> 
       </Route>
