@@ -11,9 +11,9 @@ import EditAvatarPopup from '../components/EditAvatarPopup';
 import AddPlacePopup from '../components/AddPlacePopup';
 import ImagePopup from '../components/ImagePopup';
 import ProtectedRoute from '../components/ProtectedRoute';
-import {api, authApi} from '../utils/api';
-import * as Auth from '../components/Auth';
-import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import { api } from '../utils/api';
+import * as auth from '../utils/auth';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
   const history = useHistory();
@@ -56,7 +56,7 @@ function App() {
   }, []);
 
   function handleLogin(email, password) {
-    return Auth.authorize(email, password)
+    return auth.authorize(email, password)
     .then((data) => {
       if (data.token) {
         localStorage.setItem('token', data.token);
@@ -74,7 +74,7 @@ function App() {
   }
 
   function handleRegister(email, password) {
-    return Auth.register(email, password)
+    return auth.register(email, password)
     .then(() => {
       setIsInfoTooltipOpen(true);
       setIsRegistrationSuccessful(true);
@@ -91,7 +91,7 @@ function App() {
       const token = localStorage.getItem('token');
 
       if (token) {
-        Auth.getContent(token)
+        auth.getContent(token)
         .then((res) => {
           if (res) {
             const userEmail = res.data.email;
