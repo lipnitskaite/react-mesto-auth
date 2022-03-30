@@ -103,6 +103,11 @@ function App() {
     };
   };
 
+  function signOut() {
+    localStorage.removeItem('token');
+    history.push('./sign-in');
+  }
+
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -159,7 +164,11 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header userEmail={userEmail} />
+        <Header 
+          userEmail={userEmail}
+          signOut={signOut}
+         />
+         
         <Switch>
           <Route path="/sign-up">
             <Register handleRegister={handleRegister}/>
