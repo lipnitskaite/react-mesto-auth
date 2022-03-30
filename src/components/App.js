@@ -47,29 +47,28 @@ function App() {
   }, [loggedIn])
 
   useEffect(() => {
-    Promise.all([api.getUserInfoApi(), api.getCards()])
-    .then(([userData, cards]) => {
-      setCurrentUser(userData);
-      setCards(cards);
-    })
-    .catch(err => console.log(err));
-  }, []);
+    if (loggedIn) {
+      Promise.all([api.getUserInfoApi(), api.getCards()])
+      .then(([userData, cards]) => {
+        setCurrentUser(userData);
+        setCards(cards);
+      })
+      .catch(err => console.log(err));
+    }
+  }, [loggedIn]);
 
   function handleLogin(email, password) {
     return auth.authorize(email, password)
     .then((data) => {
       if (data.token) {
         localStorage.setItem('token', data.token);
-
-        // const userEmail = data.email;
-        // setUserEmail(userEmail);
-        
-        // const { user: {email} } = data;
-        // const userEmail = { email };
-        // setUserEmail(userEmail);
         setLoggedIn(true);
         history.push('/');
       }
+    })
+    .catch(() => {
+      setIsInfoTooltipOpen(true);
+      setIsRegistrationSuccessful(false);
     })
   }
 
@@ -87,21 +86,20 @@ function App() {
   }
 
   function tokenCheck() {
-    if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
-      if (token) {
-        auth.getContent(token)
-        .then((res) => {
-          if (res) {
-            const userEmail = res.data.email;
+    if (token) {
+      auth.getContent(token)
+      .then((res) => {
+        if (res) {
+          const userEmail = res.data.email;
 
-            setLoggedIn(true);
-            setUserEmail(userEmail);
-            history.push('/');
-          }
-        });
-      };
+          setLoggedIn(true);
+          setUserEmail(userEmail);
+          history.push('/');
+        }
+      })
+      .catch((err) => console.log(err))
     };
   };
 
@@ -182,7 +180,7 @@ function App() {
               onCardDelete={handleCardDelete}
             />
           </ProtectedRoute>
-
+          
           <Route>
             {loggedIn ? <Redirect to ="/" /> : <Redirect to="/sign-in" />}
           </Route>
