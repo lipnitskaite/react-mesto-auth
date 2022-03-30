@@ -168,7 +168,7 @@ function App() {
           userEmail={userEmail}
           signOut={signOut}
          />
-         
+
         <Switch>
           <Route path="/sign-up">
             <Register handleRegister={handleRegister}/>
@@ -201,6 +201,8 @@ function App() {
           isOpen={isInfoTooltipOpen}
           successResult={isRegistrationSuccessful}
           onClose={closeAllPopups}
+          successMessage={'Вы успешно зарегистрировались!'}
+          failMessage={'Что-то пошло не так! Попробуйте ещё раз.'}
         />
 
         <EditProfilePopup 
